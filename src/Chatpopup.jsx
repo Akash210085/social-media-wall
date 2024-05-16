@@ -9,12 +9,13 @@ import Divider from "@mui/material/Divider";
 import MenuList from "@mui/material/MenuList";
 import Friend from "./Friend";
 import Chats from "./Chats";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 // import Check from "@mui/icons-material/Check";
 // import Menu from "@mui/material/Menu";
 // import MenuItem from "@mui/material/MenuItem";
 export default function SimplePopup() {
   const [anchor, setAnchor] = React.useState(null);
-  const [friendList, SetFriendList] = React.useState([
+  const [friendList] = React.useState([
     "Abhishek",
     "Sumit",
     "Akshat",
@@ -22,8 +23,8 @@ export default function SimplePopup() {
     "Nikhil",
   ]);
 
-  // const [AllChats, SetAllChats] = useState([]);
-  // // const [friendChat, SetFriendChat] = useState([]);
+  const [AllChats, SetAllChats] = useState([]);
+  const [friendChat, SetFriendChat] = useState([]);
   const [Id, SetId] = useState(0);
 
   const [isChat, SetIsChat] = useState(false);
@@ -38,6 +39,23 @@ export default function SimplePopup() {
   const id = open ? "simple-popup" : undefined;
 
   function SetCommentCount() {}
+
+  const updateChat = () => {
+    const existingChatIndex = AllChats.findIndex((chat) => chat.id === Id);
+
+    if (existingChatIndex !== -1) {
+      SetAllChats((prevChats) => {
+        const updatedChats = [...prevChats];
+        updatedChats[existingChatIndex] = { id: Id, content: friendChat };
+        return updatedChats;
+      });
+    } else {
+      SetAllChats((prevChats) => [
+        ...prevChats,
+        { id: Id, content: friendChat },
+      ]);
+    }
+  };
 
   return (
     <div>
@@ -65,7 +83,23 @@ export default function SimplePopup() {
           }}
         >
           {isChat ? (
-            <Chats SetCommentCount={SetCommentCount} />
+            <div>
+              <div className="back-button">
+                <button
+                  onClick={() => {
+                    SetIsChat(false);
+                    updateChat();
+                    console.log(AllChats);
+                  }}
+                >
+                  <ArrowBackIosNewIcon />
+                </button>
+              </div>
+              <Chats
+                SetCommentCount={SetCommentCount}
+                SetFriendChat={SetFriendChat}
+              />
+            </div>
           ) : (
             <div className="chat">
               <div className="chat-header">

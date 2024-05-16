@@ -41,7 +41,7 @@ header h1 {
 
 form.create-post {
   position: relative;
-  width: 480px;
+  width: 40%;
   margin: 30px auto 20px auto;
   background: #fff;
   padding: 15px;
@@ -174,6 +174,13 @@ p.like-count {
   position: fixed;
   bottom: 50px;
   right: 100px;
+}
+
+.back-button button {
+  background-color: #fff;
+  color: cadetblue;
+  border: none;
+  outline: none;
 }
 
 footer {

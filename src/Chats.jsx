@@ -27,6 +27,9 @@ function Chats(props) {
             SetAllChats((preValue) => {
               return [commentText, ...preValue];
             });
+            props.SetFriendChat({
+              ...allChats,
+            });
             SetCommentText("");
           }}
         >

@@ -55,6 +55,13 @@ export default function SimplePopup() {
         { id: Id, content: friendChat },
       ]);
     }
+
+    console.log(AllChats);
+  };
+
+  const getContentById = (id) => {
+    const chat = AllChats.find((chat) => chat.id === id);
+    return chat ? chat.content : null;
   };
 
   return (
@@ -98,6 +105,7 @@ export default function SimplePopup() {
               <Chats
                 SetCommentCount={SetCommentCount}
                 SetFriendChat={SetFriendChat}
+                content={getContentById(id)}
               />
             </div>
           ) : (

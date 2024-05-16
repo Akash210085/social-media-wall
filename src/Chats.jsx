@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 function Chats(props) {
-  const [allChats, SetAllChats] = useState([]);
+  const [allChats, SetAllChats] = useState([props.content]);
   const [commentText, SetCommentText] = useState("");
   return (
     <div>
